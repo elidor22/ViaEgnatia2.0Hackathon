@@ -43,4 +43,4 @@ class AzureBlobFileUploader:
 # Initialize class and upload files
 azure_blob_file_uploader = AzureBlobFileUploader()
 #azure_blob_file_uploader.upload_all_images_in_folder()
-azure_blob_file_uploader.upload_image('fr_arc_apollonia_07-1536x864.jpg')
+azure_blob_file_uploader.upload_image('fr1')
