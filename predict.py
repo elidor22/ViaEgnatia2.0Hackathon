@@ -106,4 +106,3 @@ class predict:
 			return imgname
 
 
-
