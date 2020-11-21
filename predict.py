@@ -103,8 +103,7 @@ class predict:
 			pred = predict
 			imgname = pred.get_random_string(12)
 			cv2.imwrite(imgname, image)
-			return
-predict.predict('dataset/images/theatre/unnamed.jpg')
+			return imgname
 
 
 
