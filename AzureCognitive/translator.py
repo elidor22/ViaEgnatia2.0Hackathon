@@ -1,4 +1,5 @@
 import requests, uuid, json
+from AzureCognitive import toTranslate
 
 # Add your subscription key and endpoint
 subscription_key = "f4ffcd5b08554f6da675438c0e1937f9"
@@ -14,7 +15,7 @@ constructed_url = endpoint + path
 params = {
     'api-version': '3.0',
     'from': 'en',
-    'to': ['de', 'it', 'ru', 'fr']
+    'to': [toTranslate.getlanguage()]
 }
 constructed_url = endpoint + path
 
@@ -27,7 +28,7 @@ headers = {
 
 # You can pass more than one object in body.
 body = [{
-    'text': 'Hello World!'
+    'text': toTranslate.gettext()
 }]
 
 request = requests.post(constructed_url, params=params, headers=headers, json=body)
@@ -37,6 +38,3 @@ print(json.dumps(response, sort_keys=True, ensure_ascii=False, indent=4, separat
 
 #Trying to get e single value from the response
 tst = response[0]
-arr = tst["translations"]
-italian = arr[1]
-print(italian['text'])
