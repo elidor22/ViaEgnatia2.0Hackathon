@@ -1,7 +1,8 @@
 import os
 from azure.storage.blob import BlobServiceClient, BlobClient
 from azure.storage.blob import ContentSettings, ContainerClient
-
+import random
+import string
 MY_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=viaegnatia20;AccountKey=5q2myTqtPWSaS9OUwta5Woc0opbWgaaOluLHAOa7tiqjiXsDq2sFCqAmoFaJc5tPk/Z+8SaYmgyulgKB6Vk3ng==;EndpointSuffix=core.windows.net"
 MY_IMAGE_CONTAINER = "egnatia20"
 
@@ -25,6 +26,10 @@ class AzureBlobFileUploader:
         for file_name in all_file_names:
             self.upload_image(file_name)
 
+    def get_random_string(length):
+        letters = string.ascii_lowercase
+        result_str = ''.join(random.choice(letters) for i in range(length))
+        return result_str + '.jpg'
     def upload_image(self, file_name):
         # Create blob with same name as local file name
         blob_client = self.blob_service_client.get_blob_client(container=MY_IMAGE_CONTAINER,
@@ -44,5 +49,6 @@ class AzureBlobFileUploader:
 # Initialize class and upload files
 azure_blob_file_uploader = AzureBlobFileUploader()
 #azure_blob_file_uploader.upload_all_images_in_folder()
-name = azure_blob_file_uploader.upload_image('fr11')
-print(name)
+name = azure_blob_file_uploader.upload_image(AzureBlobFileUploader.get_random_string(11))
+base_url = 'https://viaegnatia20.blob.core.windows.net/egnatia20/'
+print(base_url+name)
