@@ -38,9 +38,11 @@ class AzureBlobFileUploader:
         print(f"uploading file - {file_name}")
         with open(upload_file_path, "rb") as data:
             blob_client.upload_blob(data, overwrite=True, content_settings=image_content_setting)
+        return file_name
 
 
 # Initialize class and upload files
 azure_blob_file_uploader = AzureBlobFileUploader()
 #azure_blob_file_uploader.upload_all_images_in_folder()
-azure_blob_file_uploader.upload_image('fr1')
+name = azure_blob_file_uploader.upload_image('fr11')
+print(name)
