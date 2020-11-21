@@ -89,4 +89,7 @@ for imagePath in imagePaths:
 		(0, 255, 0), 2)
 	# show the output image
 	cv2.imshow("Output", image)
+	#Save the image that conmtains the bounding box
+	cv2.imwrite('test.jpg', image)
+
 	cv2.waitKey(0)
