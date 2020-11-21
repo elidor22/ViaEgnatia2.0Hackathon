@@ -2,6 +2,7 @@
 # python predict.py --input output/test_paths.txt
 
 # import the necessary packages
+import tensorflow
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.models import load_model
@@ -38,7 +39,7 @@ if "text/plain" == filetype:
 print("[INFO] loading object detector...")
 with tf.device('/cpu:0'):
 	model = load_model('model.h5')
-lb = pickle.loads(open(config.LB_PATH, "rb").read())
+#lb = pickle.loads(open(config.LB_PATH, "rb").read())
 
 # loop over the images that we'll be testing using our bounding box
 # regression model
