@@ -2,7 +2,6 @@
 # python predict.py --input output/test_paths.txt
 
 # import the necessary packages
-from pyimagesearch import config
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.models import load_model
@@ -16,6 +15,8 @@ import os
 import tensorflow as tf
 
 # construct the argument parser and parse the arguments
+from configPackage import config
+
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--input", default='dataset/images/Church of Saint Mary in Apollonia/Kisha_e_Shën_Marisë_Apolloni.jpg',
 	help="path to input image/text file of image paths")
@@ -36,7 +37,7 @@ if "text/plain" == filetype:
 # load our object detector and label binarizer from disk
 print("[INFO] loading object detector...")
 with tf.device('/cpu:0'):
-	model = load_model('output/model.h5')
+	model = load_model('model.h5')
 lb = pickle.loads(open(config.LB_PATH, "rb").read())
 
 # loop over the images that we'll be testing using our bounding box
