@@ -12,11 +12,12 @@ def get_token(subscription_key):
         'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
         'User-Agent':'curl'
     }
+    textstuff = 'Hello Sinner'
     data = {
         '<speak version': '\\1.0\'''',
         'lang':"en-US",
         'name': 'en-US-AriaRUS',
-        'voice':'For the Tytanyum glory'
+        'voice':'Hello Sinner'
     }
     response = requests.post(fetch_token_url, headers=headers, data=data)
     access_token = str(response.text)
