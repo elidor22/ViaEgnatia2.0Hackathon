@@ -37,6 +37,7 @@ def upload_newpicture(self, name):
     blob_client = self.blob_service_client.get_blob_client(container=MY_IMAGE_CONTAINER,
                                                            blob=name)
     # Get full path to the file
+    # Path should be dataset/images/predict.label/predict.name
     upload_file_path = 'dataset/images/Church of Saint Mary in Apollonia/fr_arc_apollonia_07-1536x864.jpg'
 
     # Create blob on storage
@@ -68,7 +69,7 @@ def get_description():
                     # Label is the label declared in the dummy db library
                     "Label": library.dbplaces["label"],
                     # Image is the image that gets returned to the user interface
-                    "Image": predict.image,
+                    "Image": "foto",
                     "Voice": "bla bla bla bla",
                     # Description gotten from dummy db
                     "Description": library.dbplaces["description"]
