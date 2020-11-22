@@ -28,8 +28,6 @@ imagePaths = []
 tf.__version__
 
 
-
-
 # loop over all CSV files in the annotations directory
 for csvPath in paths.list_files(config.ANNOTS_PATH, validExts=(".csv")):
 	# load the contents of the current CSV annotations file

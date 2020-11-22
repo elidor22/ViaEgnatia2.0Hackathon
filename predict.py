@@ -103,6 +103,6 @@ class predict:
 			pred = predict
 			imgname = pred.get_random_string(12)
 			cv2.imwrite(imgname, image)
-			return imgname
+			return imgname, label
 
 
