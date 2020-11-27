@@ -43,3 +43,4 @@ def translate(description, language):
 
     # Trying to get e single value from the response
     tst = response[0]
+translate()
