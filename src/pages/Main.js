@@ -2,17 +2,32 @@ import React from "react"
 import ImageInput from "./ImageInput"
 import ProcessedImage from "./ProcessedImage"
 import Header from "../components/Header"
+import { connect } from "react-redux";
+
 class Main extends React.Component{
     
     render(){
+     const   checker=(yes)=>{
+if(yes===null){
+return <ImageInput/>
+}else return <ProcessedImage/>
+        }
         return(
             <div class="container text-center">
                 <Header/>
-<ImageInput/>
-<ProcessedImage/>
+{checker(this.props.fetchAIReduce)}
             </div>
         )
     }
     
 }
-export default Main;
+
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+      fetchAIReduce: state.fetchAI,
+    };
+  };
+  
+  export default connect(mapStateToProps,)( Main);

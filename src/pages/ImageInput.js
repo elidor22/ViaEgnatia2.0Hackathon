@@ -1,5 +1,8 @@
 import React from "react"
 import {Form,Image,Button} from "react-bootstrap"
+import { connect } from "react-redux";
+import { fetchAI } from "../actions";
+
 class ImageInput extends React.Component{
     
     constructor(props) {
@@ -23,6 +26,14 @@ class ImageInput extends React.Component{
         reader.readAsDataURL(file)
       }
     render(){
+
+      const insertNews = (event) => {
+        event.preventDefault();
+        this.props.fetchAI(this.state.file);
+        
+        console.log(this.props.fetchAIReduce);
+      };
+      
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
@@ -43,11 +54,19 @@ class ImageInput extends React.Component{
 <div className="imgPreview">
           {$imagePreview}
         </div>
-        <Button style={{margin:"20px"}} ariant="outline-primary">Calculate</Button>
+        <Button style={{margin:"20px"}} variant="outline-primary"  onClick={insertNews}>Calculate</Button>
             </div>
             
         )
     }
     
 }
-export default ImageInput;
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    fetchAIReduce: state.fetchAI,
+  };
+};
+
+export default connect(mapStateToProps, { fetchAI })(ImageInput);
