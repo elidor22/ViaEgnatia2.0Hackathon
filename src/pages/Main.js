@@ -13,7 +13,7 @@ class Main extends React.Component {
       } else return <ProcessedImage />;
     };
     return (
-      <div class="container text-center">
+      <div className="container text-center">
         <Header />
         {checker(this.props.fetchAIReduce)}
         <Footer/>

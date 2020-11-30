@@ -46,9 +46,9 @@ class ImageInput extends React.Component{
         return(
             <div>
                 <h2>Please Input Image</h2>
-                <div class="custom-file" >
+                <div className="custom-file" >
     <Form.File className="w-90 h-90 custom-file-input"   type="image" id="exampleFormControlFile1" label="Example file input"  onChange={(e)=>this._handleImageChange(e)}/>
-    <label class="custom-file-label" for="inputGroupFile01">Choose image</label>
+    <label className="custom-file-label" for="inputGroupFile01">Choose image</label>
     </div>
 
 <div className="imgPreview">
