@@ -10,7 +10,7 @@ const Footer=()=>{
 <div className="col-11">
     <div className="row ">
         <div className="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto a">
-            <h3 className="text-muted mb-md-0 mb-5 bold-text">Apollonia Assistant</h3>
+            <h3 className="text-muted mb-md-0 mb-5 bold-text">Illyrian Assistant</h3>
         </div> 
         <div className="col-xl-2 col-md-4 col-sm-4 col-12">
         <img src={logo} width="150"
@@ -31,7 +31,7 @@ const Footer=()=>{
 
         </div>
         <div className="col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3 ">
-        <h6 className="mt-55 mt-2 text-muted bold-text"><b>Apollonia Team</b></h6><small> <span><i className="fa fa-envelope" aria-hidden="true"></i></span> <div style={{color:"black"}} >gjonajarber@outlook.com</div></small>
+        <h6 className="mt-55 mt-2 text-muted bold-text"><b>Illyrian Assistant Team</b></h6><small> <span><i className="fa fa-envelope" aria-hidden="true"></i></span> <div style={{color:"black"}} >Illyrian Assistant 2021</div></small>
         </div>
     </div>
 </div>

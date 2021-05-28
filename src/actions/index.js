@@ -1,9 +1,14 @@
 import jsonPlaceholder from "../Axios/ApiServer"
 
 export const fetchAI=(image)=>async dispatch=>{
-   return await jsonPlaceholder.post('/upload', {
-    image: image
-  })
+    const formData = new FormData();
+    console.log(image)
+    formData.append("image",image,image.name);
+    console.log(formData)
+   return await jsonPlaceholder.post('/upload',
+    formData,{
+        'Content-Type': 'multipart/form-data'
+    })
       .then(function (response) {
         console.log(response);
         dispatch({type:"FETCH_AI", payload:response.data})

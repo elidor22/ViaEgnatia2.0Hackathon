@@ -29,9 +29,9 @@ class ImageInput extends React.Component{
 
       const insertNews = (event) => {
         event.preventDefault();
+        console.log(this.state.file)
         this.props.fetchAI(this.state.file);
-        
-        console.log(this.props.fetchAIReduce);
+
       };
       
         let {imagePreviewUrl} = this.state;
