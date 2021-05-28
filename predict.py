@@ -2,6 +2,7 @@
 # python predict.py --input output/test_paths.txt
 
 # import the necessary packages
+from operator import mod
 import tensorflow
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing.image import load_img
@@ -16,10 +17,10 @@ import os
 import tensorflow as tf
 import random
 import string
-
-
+from matplotlib import pyplot as plt
+import boto3
 # construct the argument parser and parse the arguments
-from configPackage import config
+import config
 
 class predict:
 	def get_random_string(length):
@@ -27,10 +28,15 @@ class predict:
 		result_str = ''.join(random.choice(letters) for i in range(length))
 		return result_str + '.jpg'
 
-	def predict(self):
+	def predict(self, path):
+		uploads_dir = '/home/elidor/uploads/'
+		results_dir = '/home/elidor/results/'
+		bucket_name = "ml-experiments"
+		folder_name = uploads_dir
+		base_url = 'https://ml-experiments.fra1.digitaloceanspaces.com/images/'
 		ap = argparse.ArgumentParser()
 		ap.add_argument("-i", "--input",
-						default='dataset/images/Church of Saint Mary in Apollonia/Kisha_e_Shën_Marisë_Apolloni.jpg',
+						default='/home/elidor/uploads/upload.jpg',
 						help="path to input image/text file of image paths")
 		args = vars(ap.parse_args())
 
@@ -45,11 +51,11 @@ class predict:
 		if "text/plain" == filetype:
 			# load the image paths in our testing file
 			imagePaths = open(args["input"]).read().strip().split("\n")
-
+			imagePath = path
 		# load our object detector and label binarizer from disk
 		print("[INFO] loading object detector...")
 		with tf.device('/cpu:0'):
-			model = load_model('model.h5')
+			model = load_model('/home/elidor/Documents/mobileNet.h5')
 		# lb = pickle.loads(open(config.LB_PATH, "rb").read())
 
 		# loop over the images that we'll be testing using our bounding box
@@ -75,7 +81,7 @@ class predict:
 			print(i)
 
 			# label = lb.classes_[i][0]
-			labels = ['church', 'monument', 'theatre']
+			labels = ['Church of Saint Mary', 'The Monument of Apollonia', 'Theatre of Apollonia']
 			print(i)
 			label = labels[i]
 
@@ -102,7 +108,23 @@ class predict:
 			# Save the image that conmtains the bounding box
 			pred = predict
 			imgname = pred.get_random_string(12)
-			cv2.imwrite(imgname, image)
+			# show the output image
+			#cv2.imshow("Output", image)
+			#Save the image that conmtains the bounding box
+			write_name = '/home/elidor/results/'+imgname
+			cv2.imwrite(write_name, image)
+			#cv2.waitKey(0)
+
+			session = boto3.session.Session()
+			s3 = session.client('s3',
+                        region_name='fra1',
+                        endpoint_url='https://fra1.digitaloceanspaces.com',
+                        aws_access_key_id='NS24MAUHRGZ56BDTJRSF',
+                        aws_secret_access_key='Z6oz3oxKV47F91gEUoZNorpowqZ9gvLelsPKsfiTAXs')
+			s3.upload_file(write_name, bucket_name, 'images/{}'.format(imgname), ExtraArgs={'ContentType': "image/jpg", 'ACL': "public-read"})
+
 			return imgname, label
 
-
+#p = predict()
+#pred = p.predict()
+#print(pred)
